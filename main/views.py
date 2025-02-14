@@ -1,19 +1,12 @@
 from django.shortcuts import render
-
-from django.shortcuts import render
+from .models import Inventory  # Import the InventoryItem model
 
 def mainpage(request):
-    # Example inventory data (replace this with your actual data)
-    inventory = [
-        "Item 1: Laptop"
-        "Item 2: Mouse",
-        "Item 3: Keyboard",
-        "Item 4: Monitor",
-        "Item 5: Printer",
-    ]
+    # Fetch all inventory items from the database
+    items = Inventory.objects.all()
     
-    # Pass the inventory list as context
+    # Pass the items to the template
     context = {
-        'inventory': inventory,
+        'items': items,
     }
     return render(request, 'main/mainpage.html', context)
