@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
+from .forms import InventoryItemForm
 @login_required(login_url='login_view')
 def delete_item(request, item_id):
     item = get_object_or_404(Inventory, id=item_id)  # Get the item or return 404
@@ -27,3 +28,18 @@ def mainpage(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_view'))
+
+def update_item(request, item_id):
+    # Get the item to be updated or return a 404 error if not found
+    item = get_object_or_404(Inventory, id=item_id)
+
+def update_item(request, item_id):
+    item = get_object_or_404(Inventory, id=item_id)
+    if request.method == 'POST':
+        form = InventoryItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('mainpage')
+    else:
+        form = InventoryItemForm(instance=item)
+    return render(request, 'main/update_item.html', {'form': form})
