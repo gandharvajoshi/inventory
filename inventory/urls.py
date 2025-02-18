@@ -22,5 +22,6 @@ urlpatterns = [
     path("login/",include("login.urls"),name="login-page"),
     path("main/",include("main.urls"),name="main-page"),
     path("sign-up/",include("signup.urls"),name="sign-up"),
-    path("action/",include("action.urls"),name="action")
+    path("action/",include("action.urls"),name="action"),
+    path("",include("landing.urls"),name='landing')
 ]

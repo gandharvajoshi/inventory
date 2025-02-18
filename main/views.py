@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from .forms import InventoryItemForm
+
 @login_required(login_url='login_view')
 def delete_item(request, item_id):
     item = get_object_or_404(Inventory, id=item_id)  # Get the item or return 404
